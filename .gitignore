@@ -1,72 +1,73 @@
-# Released layout:
-#   airdbm_core.py, airdbm_service.py, pyproject.toml, airfoilDB/, bin/  -- the API
-#   bench/problems.py, bench/run.py, bench/gate.json                      -- run the problems
-#   bench/README.md, bench/DATA.md                                       -- how to run, what data is
-#   bench/data/                                                          -- released histories
-# Everything else is working material and stays local.
-
-dev/
-test/
-manuscript/
-slurm_logs/
-
-# Local build/QA products and provenance records. None of this is part of the release: compiled
-# manuscript PDFs and staged submission bundles, the review-evidence archive, literature PDFs kept
-# for drafting, scratch space, and the external code-index symlink.
-output/
-.omo/
-references/
-tmp/
-.codegraph
-
-# Benchmark post-processing and verification tooling, plus its derived products (figures, LaTeX
-# tables, cost/scaling/robustness summaries). Working material: the released surface is bench/*.py,
-# bench/*.md, bench/gate.json and bench/data.
-bench/_local/
-
-# Internal drafting and superseded work
-.academic-drafting/
-paper/
-paper_software/
-.verify_tmp/
-
-.venv/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.mypy_cache/
-dist/
-build/
-build_temp/
-*.egg-info/
-
-# Large binaries, built by the recipes in bin/
+.*
+!.gitignore
+!.python-version
+/_*
+airfoilDB/_*
 bin/xfoil-ubuntu22.sif
-airfoilDB/_db.pkl
-airfoilDB/_db.*.pkl.tmp
-
-# Transient run state: in-progress evaluation logs and checkpointed search state. Neither is
-# part of the release; run.py removes them once a run reaches its budget.
-bench/data/**/*.partial.csv
+bench/data/**/*.csv
 bench/data/**/*.ckpt
 bench/data/**/*.tmp
 
-# Histories and reference-stage evaluations both ship gzip-compressed. The `_`-prefixed files are the
-# epsilon-constraint sweeps that improved each reference front beyond the compared panel; releasing
-# them is what lets bench/score.py rederive every published front from tracked files alone.
-bench/data/**/*.csv
-!bench/data/**/*.csv.gz
-bench/data/**/slurm_logs/
-
-# Scheduler submission scripts. These are specific to one HPC allocation (account, partition, walltime
-# and core counts) and are of no use to anyone else, so nothing scheduler-bound is published: the
-# released surface is the plain Python entry points, which run anywhere.
-*.sbatch
-bench/*.sh
-
-.DS_Store
-.vscode/
-.claude/
-*.swp
+__pycache__/
+*.py[codz]
+*$py.class
+*.so
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+*.egg
+MANIFEST
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+cover/
+*.mo
+*.pot
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+instance/
+docs/_build/
+target/
+profile_default/
+ipython_config.py
+__pypackages__/
+celerybeat-schedule
+celerybeat.pid
+*.rdb
+*.aof
+*.pid
+mnesia/
+rabbitmq/
+rabbitmq-data/
+activemq-data/
+*.sage.py
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+/site
+dmypy.json
+cython_debug/
+tempCodeRunnerFile.py
+marimo/_static/
+marimo/_lsp/
+__marimo__/
