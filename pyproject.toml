@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# ---------------------------------------------------------------------------
+# Editable / source install of the repository checkout:
+#
+#     pip install -e .                # library only  (import airdbm_core)
+#     pip install -e ".[bench]"       # + the optimizers used to reproduce AirDbM-Bench
+#
+# This file covers the repository checkout and declares the optional extras.
+# The benchmark scripts live in bench/ and are used from the checkout rather than installed.
+# ---------------------------------------------------------------------------
+
+[project]
+name = "airdbm"
+version = "1.0"
+description = "Design-by-Morphing airfoil generation with physics-in-the-loop XFOIL evaluation, plus the AirDbM-Bench (ADO) optimization benchmark"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "Sangjoon Lee" }]
+keywords = [
+    "airfoil", "aerodynamics", "xfoil", "design-by-morphing",
+    "optimization benchmark", "derivative-free optimization",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "shapely",
+]
+
+[project.optional-dependencies]
+bench = [
+    "pymoo>=0.6",
+    "cma",
+    "optuna>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/jun9303/airdbm-bench"
+"Parent project (AirDbM)" = "https://github.com/UCBCFD/AirDbM"
+"Design-by-Morphing (2023)" = "https://doi.org/10.1093/jcde/qwad059"
+"Minimized baseline set (2026)" = "https://doi.org/10.1093/jcde/qwaf124"
+
+[tool.setuptools]
+py-modules = ["airdbm_core"]
+packages = ["core_nonpublic"]
+
+[tool.setuptools.package-data]
+core_nonpublic = ["bin/*.sif", "airfoilDB/*.dat"]
